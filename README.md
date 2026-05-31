@@ -22,6 +22,8 @@ Source: https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d
 - **Google Cloud Storage** — raw data staging
 
 ## Project Structure
+
+```
 models/
 ├── staging/
 │   ├── stg_prescriber_drug.sql      # Clean and rename raw CMS columns
@@ -29,8 +31,8 @@ models/
 ├── intermediate/
 │   └── int_glp1_prescribers.sql    # Filter to GLP-1 drugs, aggregate by provider
 └── marts/
-└── mart_glp1_outliers.sql      # Z-score outlier classification by specialty
-
+    └── mart_glp1_outliers.sql      # Z-score outlier classification by specialty
+```
 ## Transformation Pipeline
 1. **Staging** — Renames cryptic CMS column names, filters null NPIs
 2. **Intermediate** — Filters to 9 GLP-1 drug generic names, aggregates claims 
