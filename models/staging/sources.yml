@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: medicare
+    database: jaffle-shop-493118
+    schema: medicare_analysis
+    tables:
+      - name: prescriber_drug_raw

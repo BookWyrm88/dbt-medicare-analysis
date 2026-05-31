@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: stg_prescriber_drug
+    description: "Cleaned and renamed Medicare Part D prescriber drug records for 2022"
+    columns:
+      - name: provider_npi
+        description: "Unique provider identifier"
+        tests:
+          - not_null
+      - name: provider_state
+        description: "Two letter state abbreviation"
+        tests:
+          - not_null
+      - name: total_claims
+        description: "Total claims submitted for this drug by this provider"
+        tests:
+          - not_null
+
+  - name: int_glp1_prescribers
+    description: "GLP-1 prescribing aggregated to one row per provider"
+    columns:
+      - name: provider_npi
+        description: "Unique provider identifier"
+        tests:
+          - not_null
+          - unique
+
+  - name: mart_glp1_outliers
+    description: "Statistical outlier analysis of GLP-1 prescribing by specialty using z-scores"
+    columns:
+      - name: provider_npi
+        description: "Unique provider identifier"
+        tests:
+          - not_null
+          - unique
+      - name: prescribing_tier
+        description: "Outlier classification based on z-score"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['extreme_outlier', 'outlier', 'above_average', 'average', 'below_average']
